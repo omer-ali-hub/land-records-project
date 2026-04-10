@@ -473,17 +473,3 @@ async function initCountiesPage() {
     }
   }
 }
-
-async function initAboutPage() {
-  const generatedAtEl = document.getElementById("generated-at");
-
-  try {
-    const data = await loadSummaryJson();
-    setGeneratedAt(generatedAtEl, data.generated_at);
-  } catch (err) {
-    console.error("Failed to load summary.json", err);
-    if (generatedAtEl) {
-      generatedAtEl.textContent = "Could not load summary";
-    }
-  }
-}

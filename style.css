@@ -233,18 +233,6 @@ body {
   max-width: 78ch;
 }
 
-.page-panel .about-steps {
-  margin: 0 0 14px 1.1rem;
-  padding-left: 0.2rem;
-  max-width: 78ch;
-  color: var(--muted);
-  line-height: 1.55;
-}
-
-.page-panel .about-steps li {
-  margin-bottom: 8px;
-}
-
 .page-actions {
   display: flex;
   flex-wrap: wrap;
