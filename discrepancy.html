@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Land Records Project Dashboard - Discrepancy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="top-bar">
+      <div class="top-bar-left">
+        <h1>Land Records Project Dashboard</h1>
+        <p class="subtitle">Reported vs collected FHA counts by period</p>
+        <nav class="top-nav" aria-label="Primary">
+          <a href="index.html">Overview</a>
+          <a href="counties.html">Counties</a>
+          <a href="reported.html">Reported</a>
+          <a href="discrepancy.html" class="is-active">Discrepancy</a>
+          <a href="trends.html">FHA/VA</a>
+          <a href="maps.html">Maps</a>
+          <a href="all-mortgages.html">All mortgages</a>
+          <a href="parcel.html">Parcel data</a>
+          <a href="about.html">About</a>
+        </nav>
+      </div>
+      <div class="top-bar-right">
+        <span id="discrepancy-generated-at" class="meta-pill"></span>
+        <a
+          href="https://docs.google.com/spreadsheets/d/1aIXY2koolmfJhz2sqre2nG4ifCk9a2chgCTEP-Oq0s8"
+          target="_blank"
+          rel="noreferrer"
+          class="meta-link"
+        >
+          Open tracker sheet
+        </a>
+      </div>
+    </header>
+
+    <main class="layout layout--single">
+      <section class="table-panel">
+        <h2>Reported vs collected (FHA)</h2>
+        <p class="discrepancy-intro">
+          Counties are the same set as on the <a href="trends.html">FHA/VA</a> page (from
+          <code>trends.json</code>). <strong>Reported</strong> values come from the Target counties
+          tracker columns used on the <a href="reported.html">Reported</a> page. <strong>Collected</strong>
+          is the FHA-only count for that period from digitized records (same bucketing as the FHA/VA
+          type table). Within each period column, position on the horizontal axis is proportional to
+          count; scale is shared across all visible counties in that column.
+        </p>
+
+        <div class="discrepancy-legend" aria-label="Dumbbell plot legend">
+          <span class="discrepancy-legend__title">Legend</span>
+          <span class="discrepancy-legend__item">
+            <span class="discrepancy-legend__swatch discrepancy-legend__swatch--reported"></span>
+            Reported (agency / tracker)
+          </span>
+          <span class="discrepancy-legend__item">
+            <span class="discrepancy-legend__swatch discrepancy-legend__swatch--collected"></span>
+            Collected (FHA rows in hand)
+          </span>
+          <span class="discrepancy-legend__hint">In each cell: reported count is labeled <strong>above</strong> the line; collected count <strong>below</strong>.</span>
+        </div>
+
+        <div class="summary-grid discrepancy-summary">
+          <div class="summary-card summary-card--compact">
+            <span class="label">Counties (visible / total)</span>
+            <span id="discrepancy-county-count" class="value">–</span>
+          </div>
+        </div>
+
+        <div class="table-toolbar">
+          <div class="filters">
+            <input
+              id="discrepancy-search-input"
+              type="search"
+              placeholder="Filter by county or state…"
+            />
+          </div>
+        </div>
+
+        <div class="table-wrapper table-wrapper--discrepancy">
+          <table class="discrepancy-table" id="discrepancy-table">
+            <thead id="discrepancy-thead"></thead>
+            <tbody id="discrepancy-tbody">
+              <tr>
+                <td colspan="8" class="placeholder">Loading…</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>Data:</span>
+      <code>trends.json</code>
+      +
+      <code>summary.json</code>
+    </footer>
+
+    <script src="common.js"></script>
+    <script src="discrepancy.js"></script>
+  </body>
+</html>

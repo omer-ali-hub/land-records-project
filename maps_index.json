@@ -1,0 +1,185 @@
+{
+  "generated_at": "2026-04-08T17:34:35.715430",
+  "periods": [
+    "1935-40",
+    "1950",
+    "1960",
+    "1965",
+    "1970",
+    "1975"
+  ],
+  "all_periods_value": "all",
+  "counties": [
+    {
+      "county_id": "Baltimore City, MD",
+      "county_name": "Baltimore City",
+      "state": "MD",
+      "geoid": "24510",
+      "geojson": "maps/baltimore_city_md.geojson",
+      "boundary": "maps/boundaries/baltimore_city_md_boundary.geojson",
+      "feature_count": 13677,
+      "bounds": [
+        [
+          38.93095625,
+          -76.721417
+        ],
+        [
+          39.416996749999996,
+          -76.519414
+        ]
+      ]
+    },
+    {
+      "county_id": "Berks County, PA",
+      "county_name": "Berks County",
+      "state": "PA",
+      "geoid": "42011",
+      "geojson": "maps/berks_pa.geojson",
+      "boundary": "maps/boundaries/berks_pa_boundary.geojson",
+      "feature_count": 2182,
+      "bounds": [
+        [
+          40.102064975000005,
+          -76.24185724
+        ],
+        [
+          41.305443525,
+          -75.54889376
+        ]
+      ]
+    },
+    {
+      "county_id": "Galveston County, TX",
+      "county_name": "Galveston County",
+      "state": "TX",
+      "geoid": "48167",
+      "geojson": "maps/galveston_tx.geojson",
+      "boundary": "maps/boundaries/galveston_tx_boundary.geojson",
+      "feature_count": 2328,
+      "bounds": [
+        [
+          29.243020195,
+          -95.335111655
+        ],
+        [
+          29.582922505,
+          -94.345156645
+        ]
+      ]
+    },
+    {
+      "county_id": "Guilford County, NC",
+      "county_name": "Guilford County",
+      "state": "NC",
+      "geoid": "37081",
+      "geojson": "maps/guilford_nc.geojson",
+      "boundary": "maps/boundaries/guilford_nc_boundary.geojson",
+      "feature_count": 4048,
+      "bounds": [
+        [
+          35.88789877,
+          -80.066765855
+        ],
+        [
+          36.25732343,
+          -79.517162845
+        ]
+      ]
+    },
+    {
+      "county_id": "Hampden County, MA",
+      "county_name": "Hampden County",
+      "state": "MA",
+      "geoid": "25013",
+      "geojson": "maps/hampden_ma.geojson",
+      "boundary": "maps/boundaries/hampden_ma_boundary.geojson",
+      "feature_count": 3766,
+      "bounds": [
+        [
+          -39.347705315000006,
+          -90.842495965
+        ],
+        [
+          57.888249215,
+          149.517772865
+        ]
+      ]
+    },
+    {
+      "county_id": "Mecklenburg County, NC",
+      "county_name": "Mecklenburg County",
+      "state": "NC",
+      "geoid": "37119",
+      "geojson": "maps/mecklenburg_nc.geojson",
+      "boundary": "maps/boundaries/mecklenburg_nc_boundary.geojson",
+      "feature_count": 10723,
+      "bounds": [
+        [
+          34.817816615000005,
+          -82.519880585
+        ],
+        [
+          35.817716284999996,
+          -78.576380915
+        ]
+      ]
+    },
+    {
+      "county_id": "Peoria County, IL",
+      "county_name": "Peoria County",
+      "state": "IL",
+      "geoid": "17143",
+      "geojson": "maps/peoria_il.geojson",
+      "boundary": "maps/boundaries/peoria_il_boundary.geojson",
+      "feature_count": 1512,
+      "bounds": [
+        [
+          40.547915599999996,
+          -89.9993633
+        ],
+        [
+          40.9507004,
+          -89.4575407
+        ]
+      ]
+    },
+    {
+      "county_id": "Philadelphia County, PA",
+      "county_name": "Philadelphia County",
+      "state": "PA",
+      "geoid": "42101",
+      "geojson": "maps/philadelphia_pa.geojson",
+      "boundary": "maps/boundaries/philadelphia_pa_boundary.geojson",
+      "feature_count": 6289,
+      "bounds": [
+        [
+          39.89630405,
+          -75.28736260000001
+        ],
+        [
+          40.14428695,
+          -74.9496494
+        ]
+      ]
+    },
+    {
+      "county_id": "Tulsa County, OK",
+      "county_name": "Tulsa County",
+      "state": "OK",
+      "geoid": "40143",
+      "geojson": "maps/tulsa_ok.geojson",
+      "boundary": "maps/boundaries/tulsa_ok_boundary.geojson",
+      "feature_count": 19447,
+      "bounds": [
+        [
+          35.281925375,
+          -97.582751055
+        ],
+        [
+          47.296374525,
+          -72.768534045
+        ]
+      ]
+    }
+  ]
+}

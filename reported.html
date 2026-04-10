@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Land Records Project Dashboard - Reported FHA counts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="top-bar">
+      <div class="top-bar-left">
+        <h1>Land Records Project Dashboard</h1>
+        <p class="subtitle">FHA mortgage counts from agency reports (tracker sheet)</p>
+        <nav class="top-nav" aria-label="Primary">
+          <a href="index.html">Overview</a>
+          <a href="counties.html">Counties</a>
+          <a href="reported.html" class="is-active">Reported</a>
+          <a href="discrepancy.html">Discrepancy</a>
+          <a href="trends.html">FHA/VA</a>
+          <a href="maps.html">Maps</a>
+          <a href="all-mortgages.html">All mortgages</a>
+          <a href="parcel.html">Parcel data</a>
+          <a href="about.html">About</a>
+        </nav>
+      </div>
+      <div class="top-bar-right">
+        <span id="generated-at" class="meta-pill"></span>
+        <a
+          href="https://docs.google.com/spreadsheets/d/1aIXY2koolmfJhz2sqre2nG4ifCk9a2chgCTEP-Oq0s8"
+          target="_blank"
+          rel="noreferrer"
+          class="meta-link"
+        >
+          Open tracker sheet
+        </a>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="summary-panel">
+        <h2>Reported FHA totals</h2>
+        <p class="reported-intro">
+          Values below are copied from the <strong>target counties</strong> tab of the Target
+          counties tracker. They reflect published FHA counts (by metro, SMA, or county) for
+          each period, not in‑hand deed counts from this project.
+        </p>
+        <div class="summary-grid">
+          <div class="summary-card">
+            <span class="label">Counties listed</span>
+            <span id="reported-total-counties" class="value">–</span>
+          </div>
+          <div class="summary-card">
+            <span class="label">Rows matching search</span>
+            <span id="reported-filtered-count" class="value">–</span>
+          </div>
+          <div class="summary-card">
+            <span class="label">Sum of est. total FHA deeds (visible rows)</span>
+            <span id="reported-sum-est-total" class="value">–</span>
+          </div>
+        </div>
+        <p id="reported-sum-note" class="reported-note"></p>
+      </section>
+
+      <section class="table-panel">
+        <div class="table-toolbar">
+          <div class="filters">
+            <input
+              id="reported-search-input"
+              type="search"
+              placeholder="Search county, city, state, or any column value…"
+            />
+          </div>
+        </div>
+
+        <div class="table-wrapper table-wrapper--wide table-wrapper--reported">
+          <table id="reported-table" class="table-reported">
+            <thead>
+              <tr>
+                <th
+                  scope="col"
+                  class="th-sortable th-sort-active th-sort-asc"
+                  data-sort-key="county"
+                  aria-sort="ascending"
+                  title="Sort by county"
+                >
+                  County
+                </th>
+                <th
+                  scope="col"
+                  class="th-sortable"
+                  data-sort-key="city"
+                  title="Sort by central city"
+                >
+                  Central city
+                </th>
+                <th
+                  scope="col"
+                  class="th-sortable"
+                  data-sort-key="st"
+                  title="Sort by state"
+                >
+                  St
+                </th>
+                <th
+                  scope="col"
+                  class="th-sortable num-cell"
+                  data-sort-key="fha1940"
+                  title="Sort by 1940 FHA (metro)"
+                >
+                  1940 FHA (metro, 1935–40)
+                </th>
+                <th scope="col" class="th-sortable num-cell" data-sort-key="fha1950">
+                  1950 FHA (SMA)
+                </th>
+                <th scope="col" class="th-sortable num-cell" data-sort-key="fha1960">
+                  1960 FHA (county)
+                </th>
+                <th scope="col" class="th-sortable num-cell" data-sort-key="fha1965">
+                  1965 FHA (county)
+                </th>
+                <th scope="col" class="th-sortable num-cell" data-sort-key="fha1970">
+                  1970 FHA 203B (SMA)
+                </th>
+                <th scope="col" class="th-sortable num-cell" data-sort-key="fha1975">
+                  1975 FHA 203B (SMA)
+                </th>
+                <th scope="col" class="th-sortable num-cell" data-sort-key="fhaTotalEst">
+                  Est. total FHA deeds
+                </th>
+              </tr>
+            </thead>
+            <tbody id="reported-tbody">
+              <tr>
+                <td colspan="10" class="placeholder">Loading summary…</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>Data source:</span>
+      <code>summary.json</code>
+      (Target counties tab columns)
+    </footer>
+
+    <script src="common.js"></script>
+    <script src="reported.js"></script>
+  </body>
+</html>

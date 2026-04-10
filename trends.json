@@ -1,0 +1,468 @@
+{
+  "generated_at": "2026-04-08T17:34:30.209992",
+  "periods": [
+    "1935-40",
+    "1950",
+    "1960",
+    "1965",
+    "1970",
+    "1975"
+  ],
+  "type_by_period_columns": [
+    "FHA",
+    "VA"
+  ],
+  "counties": [
+    {
+      "county_id": "Baltimore City, MD",
+      "county_name": "Baltimore City",
+      "state": "MD",
+      "file_name": "data_md_baltimore_city/baltimore_all_geocoded_labeled.csv",
+      "rows_total": 13765,
+      "counts": {
+        "1935-40": 3540,
+        "1950": 5243,
+        "1960": 1418,
+        "1965": 0,
+        "1970": 1839,
+        "1975": 1725
+      },
+      "type_counts_by_period": {
+        "1935-40": {
+          "FHA": 3540,
+          "VA": 0
+        },
+        "1950": {
+          "FHA": 1137,
+          "VA": 4106
+        },
+        "1960": {
+          "FHA": 836,
+          "VA": 582
+        },
+        "1965": {
+          "FHA": 0,
+          "VA": 0
+        },
+        "1970": {
+          "FHA": 1399,
+          "VA": 440
+        },
+        "1975": {
+          "FHA": 949,
+          "VA": 776
+        }
+      }
+    },
+    {
+      "county_id": "Berks County, PA",
+      "county_name": "Berks County",
+      "state": "PA",
+      "file_name": "data_pa_berks/berks_all_geocoded.csv",
+      "rows_total": 2437,
+      "counts": {
+        "1935-40": 421,
+        "1950": 228,
+        "1960": 449,
+        "1965": 472,
+        "1970": 336,
+        "1975": 276
+      },
+      "type_counts_by_period": {
+        "1935-40": {
+          "FHA": 421,
+          "VA": 0
+        },
+        "1950": {
+          "FHA": 28,
+          "VA": 200
+        },
+        "1960": {
+          "FHA": 437,
+          "VA": 12
+        },
+        "1965": {
+          "FHA": 437,
+          "VA": 35
+        },
+        "1970": {
+          "FHA": 283,
+          "VA": 53
+        },
+        "1975": {
+          "FHA": 56,
+          "VA": 220
+        }
+      }
+    },
+    {
+      "county_id": "Galveston County, TX",
+      "county_name": "Galveston County",
+      "state": "TX",
+      "file_name": "data_tx_galveston/galveston_all_geocoded_labeled.csv",
+      "rows_total": 3274,
+      "counts": {
+        "1935-40": 123,
+        "1950": 803,
+        "1960": 376,
+        "1965": 411,
+        "1970": 584,
+        "1975": 713
+      },
+      "type_counts_by_period": {
+        "1935-40": {
+          "FHA": 123,
+          "VA": 0
+        },
+        "1950": {
+          "FHA": 349,
+          "VA": 334
+        },
+        "1960": {
+          "FHA": 301,
+          "VA": 75
+        },
+        "1965": {
+          "FHA": 285,
+          "VA": 126
+        },
+        "1970": {
+          "FHA": 203,
+          "VA": 379
+        },
+        "1975": {
+          "FHA": 163,
+          "VA": 550
+        }
+      }
+    },
+    {
+      "county_id": "Guilford County, NC",
+      "county_name": "Guilford County",
+      "state": "NC",
+      "file_name": "data_nc_guilford/guilford_all_geocoded_labeled.csv",
+      "rows_total": 6541,
+      "counts": {
+        "1935-40": 477,
+        "1950": 1437,
+        "1960": 1159,
+        "1965": 1377,
+        "1970": 1151,
+        "1975": 550
+      },
+      "type_counts_by_period": {
+        "1935-40": {
+          "FHA": 477,
+          "VA": 0
+        },
+        "1950": {
+          "FHA": 1022,
+          "VA": 408
+        },
+        "1960": {
+          "FHA": 767,
+          "VA": 392
+        },
+        "1965": {
+          "FHA": 1003,
+          "VA": 358
+        },
+        "1970": {
+          "FHA": 735,
+          "VA": 414
+        },
+        "1975": {
+          "FHA": 213,
+          "VA": 337
+        }
+      }
+    },
+    {
+      "county_id": "Hampden County, MA",
+      "county_name": "Hampden County",
+      "state": "MA",
+      "file_name": "data_ma_hampden/springfield_all_geocoded.csv",
+      "rows_total": 4786,
+      "counts": {
+        "1935-40": 783,
+        "1950": 576,
+        "1960": 794,
+        "1965": 1098,
+        "1970": 907,
+        "1975": 429
+      },
+      "type_counts_by_period": {
+        "1935-40": {
+          "FHA": 783,
+          "VA": 0
+        },
+        "1950": {
+          "FHA": 527,
+          "VA": 48
+        },
+        "1960": {
+          "FHA": 497,
+          "VA": 273
+        },
+        "1965": {
+          "FHA": 872,
+          "VA": 224
+        },
+        "1970": {
+          "FHA": 723,
+          "VA": 182
+        },
+        "1975": {
+          "FHA": 177,
+          "VA": 246
+        }
+      }
+    },
+    {
+      "county_id": "Marion County, IN",
+      "county_name": "Marion County",
+      "state": "IN",
+      "file_name": "data_in_marion/marion.xlsx",
+      "rows_total": 24367,
+      "counts": {
+        "1935-40": 5865,
+        "1950": 2848,
+        "1960": 2818,
+        "1965": 3468,
+        "1970": 3750,
+        "1975": 2984
+      },
+      "type_counts_by_period": {
+        "1935-40": {
+          "FHA": 5865,
+          "VA": 0
+        },
+        "1950": {
+          "FHA": 2383,
+          "VA": 465
+        },
+        "1960": {
+          "FHA": 2214,
+          "VA": 604
+        },
+        "1965": {
+          "FHA": 2782,
+          "VA": 686
+        },
+        "1970": {
+          "FHA": 3078,
+          "VA": 672
+        },
+        "1975": {
+          "FHA": 1327,
+          "VA": 1657
+        }
+      }
+    },
+    {
+      "county_id": "Mecklenburg County, NC",
+      "county_name": "Mecklenburg County",
+      "state": "NC",
+      "file_name": "data_nc_mecklenburg/mecklenburg_all_geocoded_labeled.csv",
+      "rows_total": 12249,
+      "counts": {
+        "1935-40": 2358,
+        "1950": 2059,
+        "1960": 2008,
+        "1965": 2587,
+        "1970": 2247,
+        "1975": 755
+      },
+      "type_counts_by_period": {
+        "1935-40": {
+          "FHA": 2358,
+          "VA": 0
+        },
+        "1950": {
+          "FHA": 856,
+          "VA": 1203
+        },
+        "1960": {
+          "FHA": 1037,
+          "VA": 971
+        },
+        "1965": {
+          "FHA": 1862,
+          "VA": 725
+        },
+        "1970": {
+          "FHA": 1430,
+          "VA": 817
+        },
+        "1975": {
+          "FHA": 319,
+          "VA": 435
+        }
+      }
+    },
+    {
+      "county_id": "Onondaga County, NY",
+      "county_name": "Onondaga County",
+      "state": "NY",
+      "file_name": "data_ny_onondaga/onondaga_all.csv",
+      "rows_total": 5098,
+      "counts": {
+        "1935-40": 356,
+        "1950": 1443,
+        "1960": 1136,
+        "1965": 1043,
+        "1970": 529,
+        "1975": 583
+      },
+      "type_counts_by_period": {
+        "1935-40": {
+          "FHA": 356,
+          "VA": 0
+        },
+        "1950": {
+          "FHA": 657,
+          "VA": 786
+        },
+        "1960": {
+          "FHA": 1081,
+          "VA": 55
+        },
+        "1965": {
+          "FHA": 958,
+          "VA": 85
+        },
+        "1970": {
+          "FHA": 485,
+          "VA": 44
+        },
+        "1975": {
+          "FHA": 446,
+          "VA": 137
+        }
+      }
+    },
+    {
+      "county_id": "Peoria County, IL",
+      "county_name": "Peoria County",
+      "state": "IL",
+      "file_name": "data_il_peoria/peoria_all_geocoded.csv",
+      "rows_total": 1530,
+      "counts": {
+        "1935-40": 584,
+        "1950": 551,
+        "1960": 82,
+        "1965": 0,
+        "1970": 313,
+        "1975": 0
+      },
+      "type_counts_by_period": {
+        "1935-40": {
+          "FHA": 584,
+          "VA": 0
+        },
+        "1950": {
+          "FHA": 333,
+          "VA": 218
+        },
+        "1960": {
+          "FHA": 26,
+          "VA": 56
+        },
+        "1965": {
+          "FHA": 0,
+          "VA": 0
+        },
+        "1970": {
+          "FHA": 290,
+          "VA": 23
+        },
+        "1975": {
+          "FHA": 0,
+          "VA": 0
+        }
+      }
+    },
+    {
+      "county_id": "Philadelphia County, PA",
+      "county_name": "Philadelphia County",
+      "state": "PA",
+      "file_name": "data_pa_philadelphia/philadelphia1960.xlsx",
+      "rows_total": 6835,
+      "counts": {
+        "1935-40": 0,
+        "1950": 0,
+        "1960": 6664,
+        "1965": 0,
+        "1970": 0,
+        "1975": 0
+      },
+      "type_counts_by_period": {
+        "1935-40": {
+          "FHA": 0,
+          "VA": 0
+        },
+        "1950": {
+          "FHA": 0,
+          "VA": 0
+        },
+        "1960": {
+          "FHA": 5097,
+          "VA": 1567
+        },
+        "1965": {
+          "FHA": 0,
+          "VA": 0
+        },
+        "1970": {
+          "FHA": 0,
+          "VA": 0
+        },
+        "1975": {
+          "FHA": 0,
+          "VA": 0
+        }
+      }
+    },
+    {
+      "county_id": "Tulsa County, OK",
+      "county_name": "Tulsa County",
+      "state": "OK",
+      "file_name": "data_ok_tulsa/tulsa_all_geocoded_labeled.csv",
+      "rows_total": 22964,
+      "counts": {
+        "1935-40": 5984,
+        "1950": 5243,
+        "1960": 1944,
+        "1965": 3402,
+        "1970": 2726,
+        "1975": 3428
+      },
+      "type_counts_by_period": {
+        "1935-40": {
+          "FHA": 5982,
+          "VA": 2
+        },
+        "1950": {
+          "FHA": 3401,
+          "VA": 1842
+        },
+        "1960": {
+          "FHA": 1909,
+          "VA": 35
+        },
+        "1965": {
+          "FHA": 3344,
+          "VA": 58
+        },
+        "1970": {
+          "FHA": 2684,
+          "VA": 42
+        },
+        "1975": {
+          "FHA": 3258,
+          "VA": 170
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Land Records Project Dashboard - Maps</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body data-maps-base="">
+    <header class="top-bar">
+      <div class="top-bar-left">
+        <h1>Land Records Project Dashboard</h1>
+        <p class="subtitle">Geocoded FHA and VA mortgages by period</p>
+        <nav class="top-nav" aria-label="Primary">
+          <a href="index.html">Overview</a>
+          <a href="counties.html">Counties</a>
+          <a href="reported.html">Reported</a>
+          <a href="discrepancy.html">Discrepancy</a>
+          <a href="trends.html">FHA/VA</a>
+          <a href="maps.html" class="is-active">Maps</a>
+          <a href="all-mortgages.html">All mortgages</a>
+          <a href="parcel.html">Parcel data</a>
+          <a href="about.html">About</a>
+        </nav>
+      </div>
+      <div class="top-bar-right">
+        <span id="maps-generated-at" class="meta-pill"></span>
+      </div>
+    </header>
+
+    <main class="layout layout--single">
+      <section class="table-panel maps-page-panel">
+        <h2>County maps</h2>
+        <p class="parcel-intro">
+          One map per county that has geocoded rows in the summary. The view is limited to the
+          county boundary (Census outline); areas outside are dimmed. Only points with a parseable
+          year in 1935–1975 and classified as FHA or VA are shown (same rules as the Mortgages
+          tables). Markers are fixed on the map; changing the <strong>Period</strong> dropdown
+          only filters which points are visible. <strong>All years</strong> colors markers by
+          calendar year. FHA uses × markers; VA uses circles. There is no clustering.
+        </p>
+        <div id="maps-county-list" class="maps-county-list" aria-busy="true">
+          <p class="maps-page-placeholder">Loading map list…</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>Data source:</span>
+      <code>maps_index.json</code>
+      · Basemap © OpenStreetMap © CARTO
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="maps.js"></script>
+  </body>
+</html>

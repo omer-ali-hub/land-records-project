@@ -1,0 +1,307 @@
+{
+  "generated_at": "2026-04-08T17:52:46.967199",
+  "parcel_data_root": "/Users/omerali/Library/CloudStorage/Dropbox/parcel_data",
+  "dropbox_folder_url": "https://www.dropbox.com/scl/fo/zwwwzz38lmvxtb4lumdc7/ADHTwOEiOcNLMEbUm2MhGMA?rlkey=5qsavvofbmifoborcfa7k2su9&st=w3t33o7d&dl=0",
+  "count": 24,
+  "counties": [
+    {
+      "folder": "az_maricopa",
+      "county_name": "Az Maricopa",
+      "rows_total": 1726986,
+      "legal_description_populated": 793530,
+      "legal_description_pct": 45.9,
+      "legal_description_column": "legaldesc",
+      "source_files": [
+        "az_maricopa.csv.zip"
+      ],
+      "error": null
+    },
+    {
+      "folder": "in_marion",
+      "county_name": "In Marion",
+      "rows_total": 691132,
+      "legal_description_populated": 691050,
+      "legal_description_pct": 100.0,
+      "legal_description_column": "legaldesc",
+      "source_files": [
+        "in_marion.csv",
+        "in_marion.csv.zip"
+      ],
+      "error": null
+    },
+    {
+      "folder": "ma_hampden",
+      "county_name": "Ma Hampden",
+      "rows_total": 331128,
+      "legal_description_populated": 0,
+      "legal_description_pct": 0.0,
+      "legal_description_column": "legaldesc",
+      "source_files": [
+        "ma_hampden.csv",
+        "ma_hampden.csv.zip"
+      ],
+      "error": null
+    },
+    {
+      "folder": "md_anne_arundel",
+      "county_name": "Md Anne Arundel",
+      "rows_total": 281737,
+      "legal_description_populated": 266251,
+      "legal_description_pct": 94.5,
+      "legal_description_column": "legaldesc",
+      "source_files": [
+        "md_anne_arundel.csv.zip"
+      ],
+      "error": null
+    },
+    {
+      "folder": "md_baltimore",
+      "county_name": "Md Baltimore",
+      "rows_total": 237711,
+      "legal_description_populated": 157848,
+      "legal_description_pct": 66.4,
+      "legal_description_column": "legaldesc",
+      "source_files": [
+        "md_baltimore.csv.zip"
+      ],
+      "error": null
+    },
+    {
+      "folder": "md_baltimore_county",
+      "county_name": "Md Baltimore County",
+      "rows_total": 371650,
+      "legal_description_populated": 321009,
+      "legal_description_pct": 86.4,
+      "legal_description_column": "legaldesc",
+      "source_files": [
+        "md_baltimore_county.csv.zip"
+      ],
+      "error": null
+    },
+    {
+      "folder": "md_howard",
+      "county_name": "Md Howard",
+      "rows_total": 96715,
+      "legal_description_populated": 96466,
+      "legal_description_pct": 99.7,
+      "legal_description_column": "legaldesc",
+      "source_files": [
+        "md_howard.csv.zip"
+      ],
+      "error": null
+    },
+    {
+      "folder": "md_montgomery",
+      "county_name": "Md Montgomery",
+      "rows_total": 285885,
+      "legal_description_populated": 279822,
+      "legal_description_pct": 97.9,
+      "legal_description_column": "legaldesc",
+      "source_files": [
+        "md_montgomery.csv.zip"
+      ],
+      "error": null
+    },
+    {
+      "folder": "md_prince_georges",
+      "county_name": "Md Prince Georges",
+      "rows_total": 347504,
+      "legal_description_populated": 0,
+      "legal_description_pct": 0.0,
+      "legal_description_column": "legaldesc",
+      "source_files": [
+        "md_prince_georges.csv.zip"
+      ],
+      "error": null
+    },
+    {
+      "folder": "nc_durham",
+      "county_name": "Nc Durham",
+      "rows_total": 254010,
+      "legal_description_populated": 254010,
+      "legal_description_pct": 100.0,
+      "legal_description_column": "legaldesc",
+      "source_files": [
+        "nc_durham.csv",
+        "nc_durham.csv.zip"
+      ],
+      "error": null
+    },
+    {
+      "folder": "nc_forsyth",
+      "county_name": "Nc Forsyth",
+      "rows_total": 165124,
+      "legal_description_populated": 0,
+      "legal_description_pct": 0.0,
+      "legal_description_column": "legaldesc",
+      "source_files": [
+        "nc_forsyth.csv.zip"
+      ],
+      "error": null
+    },
+    {
+      "folder": "nc_guilford",
+      "county_name": "Nc Guilford",
+      "rows_total": 439388,
+      "legal_description_populated": 437582,
+      "legal_description_pct": 99.6,
+      "legal_description_column": "legaldesc",
+      "source_files": [
+        "nc_guilford.csv",
+        "nc_guilford.csv.zip"
+      ],
+      "error": null
+    },
+    {
+      "folder": "nc_mecklenburg",
+      "county_name": "Nc Mecklenburg",
+      "rows_total": 818754,
+      "legal_description_populated": 710558,
+      "legal_description_pct": 86.8,
+      "legal_description_column": "legaldesc",
+      "source_files": [
+        "nc_mecklenburg.csv",
+        "nc_mecklenburg.csv.zip"
+      ],
+      "error": null
+    },
+    {
+      "folder": "nc_wake",
+      "county_name": "Nc Wake",
+      "rows_total": 420154,
+      "legal_description_populated": 419957,
+      "legal_description_pct": 100.0,
+      "legal_description_column": "legaldesc",
+      "source_files": [
+        "nc_wake.csv.zip"
+      ],
+      "error": null
+    },
+    {
+      "folder": "nh_hillsborough",
+      "county_name": "Nh Hillsborough",
+      "rows_total": 159438,
+      "legal_description_populated": 0,
+      "legal_description_pct": 0.0,
+      "legal_description_column": "legaldesc",
+      "source_files": [
+        "nh_hillsborough.csv.zip"
+      ],
+      "error": null
+    },
+    {
+      "folder": "ny_onondaga",
+      "county_name": "Ny Onondaga",
+      "rows_total": 181805,
+      "legal_description_populated": 0,
+      "legal_description_pct": 0.0,
+      "legal_description_column": "legaldesc",
+      "source_files": [
+        "ny_onondaga.csv.zip"
+      ],
+      "error": null
+    },
+    {
+      "folder": "oh_summit",
+      "county_name": "Oh Summit",
+      "rows_total": 520852,
+      "legal_description_populated": 519600,
+      "legal_description_pct": 99.8,
+      "legal_description_column": "legaldesc",
+      "source_files": [
+        "oh_summit.csv.zip",
+        "rows_with_neighborhood.csv"
+      ],
+      "error": null
+    },
+    {
+      "folder": "ok_tulsa",
+      "county_name": "Ok Tulsa",
+      "rows_total": 561082,
+      "legal_description_populated": 550382,
+      "legal_description_pct": 98.1,
+      "legal_description_column": "legaldesc",
+      "source_files": [
+        "ok_tulsa.csv",
+        "ok_tulsa.csv.zip",
+        "ok_tulsa_sample.csv"
+      ],
+      "error": null
+    },
+    {
+      "folder": "pa_allegheny",
+      "county_name": "Pa Allegheny",
+      "rows_total": 1169782,
+      "legal_description_populated": 1165008,
+      "legal_description_pct": 99.6,
+      "legal_description_column": "legaldesc",
+      "source_files": [
+        "pa_allegheny.csv",
+        "pa_allegheny.csv.zip"
+      ],
+      "error": null
+    },
+    {
+      "folder": "pa_berks",
+      "county_name": "Pa Berks",
+      "rows_total": 313204,
+      "legal_description_populated": 0,
+      "legal_description_pct": 0.0,
+      "legal_description_column": "legaldesc",
+      "source_files": [
+        "pa_berks.csv",
+        "pa_berks.csv.zip"
+      ],
+      "error": null
+    },
+    {
+      "folder": "tx_bexar",
+      "county_name": "Tx Bexar",
+      "rows_total": 684238,
+      "legal_description_populated": 656677,
+      "legal_description_pct": 96.0,
+      "legal_description_column": "legaldesc",
+      "source_files": [
+        "tx_bexar.csv.zip"
+      ],
+      "error": null
+    },
+    {
+      "folder": "tx_galveston",
+      "county_name": "Tx Galveston",
+      "rows_total": 372740,
+      "legal_description_populated": 368146,
+      "legal_description_pct": 98.8,
+      "legal_description_column": "legaldesc",
+      "source_files": [
+        "tx_galveston.csv",
+        "tx_galveston.csv.zip"
+      ],
+      "error": null
+    },
+    {
+      "folder": "tx_tarrant",
+      "county_name": "Tx Tarrant",
+      "rows_total": 729201,
+      "legal_description_populated": 706176,
+      "legal_description_pct": 96.8,
+      "legal_description_column": "legaldesc",
+      "source_files": [
+        "tx_tarrant.csv.zip"
+      ],
+      "error": null
+    },
+    {
+      "folder": "wi_dane",
+      "county_name": "Wi Dane",
+      "rows_total": 218463,
+      "legal_description_populated": 136592,
+      "legal_description_pct": 62.5,
+      "legal_description_column": "legaldesc",
+      "source_files": [
+        "wi_dane.csv.zip"
+      ],
+      "error": null
+    }
+  ]
+}

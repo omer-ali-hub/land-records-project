@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Land Records Project Dashboard - Overview</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="top-bar">
+      <div class="top-bar-left">
+        <h1>Land Records Project Dashboard</h1>
+        <p class="subtitle">High‑level status of data collection for land records project</p>
+        <nav class="top-nav" aria-label="Primary">
+          <a href="index.html" class="is-active">Overview</a>
+          <a href="counties.html">Counties</a>
+          <a href="reported.html">Reported</a>
+          <a href="discrepancy.html">Discrepancy</a>
+          <a href="trends.html">FHA/VA</a>
+          <a href="maps.html">Maps</a>
+          <a href="all-mortgages.html">All mortgages</a>
+          <a href="parcel.html">Parcel data</a>
+          <a href="about.html">About</a>
+        </nav>
+      </div>
+      <div class="top-bar-right">
+        <span id="generated-at" class="meta-pill"></span>
+        <a
+          href="https://docs.google.com/spreadsheets/d/1aIXY2koolmfJhz2sqre2nG4ifCk9a2chgCTEP-Oq0s8"
+          target="_blank"
+          rel="noreferrer"
+          class="meta-link"
+        >
+          Open tracker sheet
+        </a>
+      </div>
+    </header>
+
+    <main class="layout layout--single">
+      <section class="summary-panel">
+        <h2>Summary</h2>
+        <div class="summary-grid">
+          <div class="summary-card">
+            <span class="label">Counties</span>
+            <span id="total-counties" class="value">–</span>
+          </div>
+          <div class="summary-card">
+            <span class="label">Rows (all)</span>
+            <span id="total-rows" class="value">–</span>
+          </div>
+          <div class="summary-card">
+            <span class="label">With addresses</span>
+            <span id="total-rows-address" class="value">–</span>
+          </div>
+          <div class="summary-card">
+            <span class="label">Geocoded</span>
+            <span id="total-rows-geocoded" class="value">–</span>
+          </div>
+        </div>
+        <div id="status-breakdown-section" class="status-breakdown-section" hidden>
+          <h3 class="summary-subheading">By tracker status</h3>
+          <div
+            id="status-breakdown"
+            class="summary-grid summary-grid--status"
+          ></div>
+        </div>
+      </section>
+
+      <section class="map-panel">
+        <h2>Target counties (ACQUIRED &amp; PENDING)</h2>
+        <div class="map-legend" aria-hidden="true">
+          <span class="map-legend-swatch map-legend-swatch--acquired"></span>
+          <span>ACQUIRED</span>
+          <span class="map-legend-swatch map-legend-swatch--pending"></span>
+          <span>PENDING</span>
+        </div>
+        <p class="map-zoom-hint">Double-click to zoom in.</p>
+        <div
+          id="overview-map"
+          class="overview-map"
+          role="presentation"
+        ></div>
+      </section>
+
+      <section class="page-panel">
+        <h2>What you can do here</h2>
+        <p>
+          This dashboard is generated from your Google Sheet tracker plus optional
+          local CSV summaries. Use the pages above to jump between a quick overview
+          and the full county table.
+        </p>
+        <div class="page-actions">
+          <a class="meta-link" href="counties.html">Open counties table</a>
+          <a class="meta-link" href="maps.html">County mortgage maps</a>
+          <a class="meta-link" href="parcel.html">Parcel data (folder list)</a>
+          <a class="meta-link" href="about.html">How this site is built</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>Data source:</span>
+      <code>summary.json</code>
+    </footer>
+
+    <script src="common.js"></script>
+    <script src="main.js"></script>
+  </body>
+  </html>
+

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Land Records Project Dashboard - About</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="top-bar">
+      <div class="top-bar-left">
+        <h1>Land Records Project Dashboard</h1>
+        <p class="subtitle">How this site is generated</p>
+        <nav class="top-nav" aria-label="Primary">
+          <a href="index.html">Overview</a>
+          <a href="counties.html">Counties</a>
+          <a href="reported.html">Reported</a>
+          <a href="discrepancy.html">Discrepancy</a>
+          <a href="trends.html">FHA/VA</a>
+          <a href="maps.html">Maps</a>
+          <a href="all-mortgages.html">All mortgages</a>
+          <a href="parcel.html">Parcel data</a>
+          <a href="about.html" class="is-active">About</a>
+        </nav>
+      </div>
+      <div class="top-bar-right">
+        <span id="generated-at" class="meta-pill"></span>
+        <a
+          href="https://docs.google.com/spreadsheets/d/1aIXY2koolmfJhz2sqre2nG4ifCk9a2chgCTEP-Oq0s8"
+          target="_blank"
+          rel="noreferrer"
+          class="meta-link"
+        >
+          Open tracker sheet
+        </a>
+      </div>
+    </header>
+
+    <main class="layout layout--single">
+      <section class="page-panel">
+        <h2>What this is</h2>
+        <p>
+          This is a static dashboard hosted via GitHub Pages. The browser loads
+          <code>summary.json</code> from the same folder and renders tables and totals.
+        </p>
+
+        <h2>How to update the data</h2>
+        <p>
+          Run <code>python scripts/build_summary.py</code> locally. That script writes
+          <code>data_summary/summary.json</code> (for analysis) and copies the same file to
+          <code>docs/summary.json</code> (for the website).
+        </p>
+
+        <h2>Parcel data page</h2>
+        <p>
+          The same script scans your local <code>parcel_data</code> folder (one subfolder per
+          county)—by default <code>~/Library/CloudStorage/Dropbox/parcel_data</code> or
+          <code>~/Dropbox/parcel_data</code> depending on which exists—and writes
+          <code>parcel_counties.json</code>. The Dropbox share link in the UI is for people
+          only. Override <code>PARCEL_DATA_DIR</code> in <code>scripts/build_summary.py</code>
+          if your path differs.
+        </p>
+
+        <h2>Counties page · data folder link</h2>
+        <p>
+          Row counts come from files under <code>DATA_ROOT</code> in
+          <code>scripts/build_summary.py</code>. The button uses a Dropbox shared-folder
+          HTTPS link (see <code>DROPBOX_DATA_FOLDER_URL</code>), like the parcel page. If
+          that constant is empty, the build falls back to a local <code>file://</code> path.
+        </p>
+
+        <h2>How to turn on the public link (first time only)</h2>
+        <p>
+          GitHub does not publish the site until you tell it which folder to use. “
+          <strong>main + /docs</strong>” means: use the <code>docs</code> folder on the
+          <code>main</code> branch as the website root (so <code>docs/index.html</code> becomes
+          the home page).
+        </p>
+        <ol class="about-steps">
+          <li>
+            Open your repo on GitHub → <strong>Settings</strong> (top bar of the repo, not your
+            profile).
+          </li>
+          <li>Left sidebar → <strong>Pages</strong>.</li>
+          <li>
+            Under <strong>Build and deployment</strong> → <strong>Source</strong>, choose
+            <strong>Deploy from a branch</strong>.
+          </li>
+          <li>
+            Under <strong>Branch</strong>: select <code>main</code>, folder
+            <code>/docs</code>, then <strong>Save</strong>.
+          </li>
+          <li>
+            Wait one to two minutes, then open
+            <a
+              href="https://omer-ali-hub.github.io/land-records-dashboard/"
+              target="_blank"
+              rel="noreferrer"
+              >https://omer-ali-hub.github.io/land-records-dashboard/</a
+            >. If it still 404s, refresh after another minute.
+          </li>
+        </ol>
+
+        <h2>How to publish updates</h2>
+        <p>
+          Commit and push changes under <code>docs/</code> (especially
+          <code>docs/summary.json</code> and <code>docs/parcel_counties.json</code>) to
+          <code>main</code>. GitHub Pages updates shortly after each push.
+        </p>
+
+        <div class="page-actions">
+          <a class="meta-link" href="index.html">Back to overview</a>
+          <a class="meta-link" href="counties.html">Open counties table</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>Data source:</span>
+      <code>summary.json</code>
+    </footer>
+
+    <script src="common.js"></script>
+    <script src="about.js"></script>
+  </body>
+</html>

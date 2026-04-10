@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Land Records Project Dashboard - Parcel data</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="top-bar">
+      <div class="top-bar-left">
+        <h1>Land Records Project Dashboard</h1>
+        <p class="subtitle">Counties with parcel data on disk</p>
+        <nav class="top-nav" aria-label="Primary">
+          <a href="index.html">Overview</a>
+          <a href="counties.html">Counties</a>
+          <a href="reported.html">Reported</a>
+          <a href="discrepancy.html">Discrepancy</a>
+          <a href="trends.html">FHA/VA</a>
+          <a href="maps.html">Maps</a>
+          <a href="all-mortgages.html">All mortgages</a>
+          <a href="parcel.html" class="is-active">Parcel data</a>
+          <a href="about.html">About</a>
+        </nav>
+      </div>
+      <div class="top-bar-right">
+        <span id="parcel-generated-at" class="meta-pill"></span>
+        <a
+          id="dropbox-parcel-link"
+          href="https://www.dropbox.com/scl/fo/zwwwzz38lmvxtb4lumdc7/ADHTwOEiOcNLMEbUm2MhGMA?rlkey=5qsavvofbmifoborcfa7k2su9&st=w3t33o7d&dl=0"
+          target="_blank"
+          rel="noreferrer"
+          class="meta-link"
+        >
+          Open Dropbox folder
+        </a>
+      </div>
+    </header>
+
+    <main class="layout layout--single">
+      <section class="page-panel">
+        <h2>Parcel data</h2>
+        <p class="parcel-intro">
+          Each subfolder under your synced <code>parcel_data</code> folder (folder name =
+          county) is listed below—usually
+          <code>~/Library/CloudStorage/Dropbox/parcel_data</code> or
+          <code>~/Dropbox/parcel_data</code> on a Mac. The Dropbox button opens the cloud
+          folder; the table is built when you run <code>python scripts/build_summary.py</code>.
+          Legal description filled is the percentage of rows with a non-empty value in the
+          legal-description column (name variants like <code>legal_description</code> are
+          matched) across CSV/Excel files in each county folder.
+        </p>
+        <p id="parcel-count-line" class="parcel-meta"></p>
+        <div class="table-wrapper">
+          <table class="parcel-coverage-table" aria-describedby="parcel-count-line">
+            <thead>
+              <tr>
+                <th scope="col">County</th>
+                <th scope="col">Legal description filled</th>
+              </tr>
+            </thead>
+            <tbody id="parcel-tbody">
+              <tr>
+                <td colspan="2" class="placeholder">Loading…</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>Data source:</span>
+      <code>parcel_counties.json</code>
+    </footer>
+
+    <script src="parcel.js"></script>
+  </body>
+</html>

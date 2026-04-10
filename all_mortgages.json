@@ -1,0 +1,413 @@
+{
+  "generated_at": "2026-04-08T17:35:20.252823",
+  "years": [
+    1929,
+    1930,
+    1931,
+    1932,
+    1933,
+    1934,
+    1935,
+    1936,
+    1937,
+    1938,
+    1939,
+    1940,
+    1941,
+    1942,
+    1943,
+    1944,
+    1945,
+    1946,
+    1947,
+    1948,
+    1949,
+    1950,
+    1951,
+    1952,
+    1953,
+    1954,
+    1955,
+    1956,
+    1957,
+    1958,
+    1959,
+    1960,
+    1961,
+    1962,
+    1963,
+    1964,
+    1965,
+    1966,
+    1967,
+    1968,
+    1969,
+    1970,
+    1971,
+    1972,
+    1973,
+    1974,
+    1975,
+    1976
+  ],
+  "categories": [
+    "FHA",
+    "VA",
+    "Conventional"
+  ],
+  "counties": [
+    {
+      "county_id": "Berks County, PA",
+      "county_name": "Berks County",
+      "state": "PA",
+      "source_file": "/Users/omerali/Library/CloudStorage/Dropbox/RSF - land records project/pa_berks/all_mortgages_30_to_75_dashbpard.xlsx",
+      "yearly_counts": [
+        {
+          "year": 1929,
+          "FHA": 0,
+          "VA": 0,
+          "Conventional": 70,
+          "Total": 70
+        },
+        {
+          "year": 1930,
+          "FHA": 0,
+          "VA": 0,
+          "Conventional": 1155,
+          "Total": 1155
+        },
+        {
+          "year": 1931,
+          "FHA": 0,
+          "VA": 0,
+          "Conventional": 1814,
+          "Total": 1814
+        },
+        {
+          "year": 1932,
+          "FHA": 0,
+          "VA": 0,
+          "Conventional": 1413,
+          "Total": 1413
+        },
+        {
+          "year": 1933,
+          "FHA": 0,
+          "VA": 0,
+          "Conventional": 987,
+          "Total": 987
+        },
+        {
+          "year": 1934,
+          "FHA": 0,
+          "VA": 0,
+          "Conventional": 1726,
+          "Total": 1726
+        },
+        {
+          "year": 1935,
+          "FHA": 49,
+          "VA": 2,
+          "Conventional": 1601,
+          "Total": 1652
+        },
+        {
+          "year": 1936,
+          "FHA": 98,
+          "VA": 0,
+          "Conventional": 1075,
+          "Total": 1173
+        },
+        {
+          "year": 1937,
+          "FHA": 99,
+          "VA": 0,
+          "Conventional": 1356,
+          "Total": 1455
+        },
+        {
+          "year": 1938,
+          "FHA": 71,
+          "VA": 0,
+          "Conventional": 1430,
+          "Total": 1501
+        },
+        {
+          "year": 1939,
+          "FHA": 56,
+          "VA": 1,
+          "Conventional": 1584,
+          "Total": 1641
+        },
+        {
+          "year": 1940,
+          "FHA": 55,
+          "VA": 0,
+          "Conventional": 1671,
+          "Total": 1726
+        },
+        {
+          "year": 1941,
+          "FHA": 78,
+          "VA": 0,
+          "Conventional": 2027,
+          "Total": 2105
+        },
+        {
+          "year": 1942,
+          "FHA": 98,
+          "VA": 0,
+          "Conventional": 1752,
+          "Total": 1850
+        },
+        {
+          "year": 1943,
+          "FHA": 76,
+          "VA": 0,
+          "Conventional": 1845,
+          "Total": 1921
+        },
+        {
+          "year": 1944,
+          "FHA": 31,
+          "VA": 1,
+          "Conventional": 2478,
+          "Total": 2510
+        },
+        {
+          "year": 1945,
+          "FHA": 5,
+          "VA": 2,
+          "Conventional": 2777,
+          "Total": 2784
+        },
+        {
+          "year": 1946,
+          "FHA": 34,
+          "VA": 6,
+          "Conventional": 4468,
+          "Total": 4508
+        },
+        {
+          "year": 1947,
+          "FHA": 18,
+          "VA": 203,
+          "Conventional": 4116,
+          "Total": 4337
+        },
+        {
+          "year": 1948,
+          "FHA": 12,
+          "VA": 268,
+          "Conventional": 4089,
+          "Total": 4369
+        },
+        {
+          "year": 1949,
+          "FHA": 17,
+          "VA": 337,
+          "Conventional": 3500,
+          "Total": 3854
+        },
+        {
+          "year": 1950,
+          "FHA": 73,
+          "VA": 557,
+          "Conventional": 3979,
+          "Total": 4609
+        },
+        {
+          "year": 1951,
+          "FHA": 80,
+          "VA": 586,
+          "Conventional": 3866,
+          "Total": 4532
+        },
+        {
+          "year": 1952,
+          "FHA": 75,
+          "VA": 701,
+          "Conventional": 3626,
+          "Total": 4402
+        },
+        {
+          "year": 1953,
+          "FHA": 74,
+          "VA": 418,
+          "Conventional": 3695,
+          "Total": 4187
+        },
+        {
+          "year": 1954,
+          "FHA": 79,
+          "VA": 327,
+          "Conventional": 3796,
+          "Total": 4202
+        },
+        {
+          "year": 1955,
+          "FHA": 177,
+          "VA": 640,
+          "Conventional": 3871,
+          "Total": 4688
+        },
+        {
+          "year": 1956,
+          "FHA": 154,
+          "VA": 621,
+          "Conventional": 4059,
+          "Total": 4834
+        },
+        {
+          "year": 1957,
+          "FHA": 257,
+          "VA": 130,
+          "Conventional": 3854,
+          "Total": 4241
+        },
+        {
+          "year": 1958,
+          "FHA": 452,
+          "VA": 50,
+          "Conventional": 3714,
+          "Total": 4216
+        },
+        {
+          "year": 1959,
+          "FHA": 420,
+          "VA": 151,
+          "Conventional": 4148,
+          "Total": 4719
+        },
+        {
+          "year": 1960,
+          "FHA": 442,
+          "VA": 12,
+          "Conventional": 4030,
+          "Total": 4484
+        },
+        {
+          "year": 1961,
+          "FHA": 387,
+          "VA": 11,
+          "Conventional": 3949,
+          "Total": 4347
+        },
+        {
+          "year": 1962,
+          "FHA": 336,
+          "VA": 34,
+          "Conventional": 4055,
+          "Total": 4425
+        },
+        {
+          "year": 1963,
+          "FHA": 367,
+          "VA": 47,
+          "Conventional": 4475,
+          "Total": 4889
+        },
+        {
+          "year": 1964,
+          "FHA": 425,
+          "VA": 39,
+          "Conventional": 4068,
+          "Total": 4532
+        },
+        {
+          "year": 1965,
+          "FHA": 437,
+          "VA": 40,
+          "Conventional": 4128,
+          "Total": 4605
+        },
+        {
+          "year": 1966,
+          "FHA": 293,
+          "VA": 26,
+          "Conventional": 3769,
+          "Total": 4088
+        },
+        {
+          "year": 1967,
+          "FHA": 233,
+          "VA": 43,
+          "Conventional": 3695,
+          "Total": 3971
+        },
+        {
+          "year": 1968,
+          "FHA": 254,
+          "VA": 52,
+          "Conventional": 3279,
+          "Total": 3585
+        },
+        {
+          "year": 1969,
+          "FHA": 321,
+          "VA": 47,
+          "Conventional": 3026,
+          "Total": 3394
+        },
+        {
+          "year": 1970,
+          "FHA": 290,
+          "VA": 56,
+          "Conventional": 2854,
+          "Total": 3200
+        },
+        {
+          "year": 1971,
+          "FHA": 189,
+          "VA": 57,
+          "Conventional": 4686,
+          "Total": 4932
+        },
+        {
+          "year": 1972,
+          "FHA": 39,
+          "VA": 20,
+          "Conventional": 6093,
+          "Total": 6152
+        },
+        {
+          "year": 1973,
+          "FHA": 35,
+          "VA": 35,
+          "Conventional": 6275,
+          "Total": 6345
+        },
+        {
+          "year": 1974,
+          "FHA": 90,
+          "VA": 211,
+          "Conventional": 4726,
+          "Total": 5027
+        },
+        {
+          "year": 1975,
+          "FHA": 57,
+          "VA": 228,
+          "Conventional": 4658,
+          "Total": 4943
+        },
+        {
+          "year": 1976,
+          "FHA": 0,
+          "VA": 8,
+          "Conventional": 173,
+          "Total": 181
+        }
+      ],
+      "totals": {
+        "FHA": 6833,
+        "VA": 5967,
+        "Conventional": 149481,
+        "Total": 162281
+      },
+      "map_geojson": "all_mortgages_maps/berks_pa.geojson",
+      "map_feature_count": 124552,
+      "has_lat_lon": true
+    }
+  ]
+}
