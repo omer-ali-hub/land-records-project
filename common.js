@@ -716,9 +716,110 @@ function renderWorkInProgress(panel, data, history) {
   panel.hidden = false;
 }
 
-async function loadAndRenderWorkInProgress() {
-  const panel = document.getElementById("wip-panel");
+/**
+ * Match `tracker_status_category` from `scripts/build_summary.py` so the
+ * frontend partitions counties the same way as the bundled status counts.
+ * "1 - ACQUIRED" -> "ACQUIRED"; bare values pass through.
+ */
+function statusCategory(statusVal) {
+  if (statusVal == null) return "";
+  const s = String(statusVal).trim();
+  if (!s || s.toLowerCase() === "nan") return "";
+  const idx = s.indexOf(" - ");
+  return idx >= 0 ? s.slice(idx + 3).trim() : s;
+}
+
+/**
+ * Build a Set of county_id keys (lowercased "<county>, <ST>") for the WIP
+ * sources, so the "ACQUIRED but not yet digitized" list can exclude any county
+ * that already shows up in the work-in-progress cards. Labels look like
+ * "Maricopa, AZ (Phoenix)"; we add both the bare and `<name> County` forms
+ * because some `summary.json` rows use the suffix and some don't.
+ */
+function buildWipCountyIdSet(wipData) {
+  const out = new Set();
+  for (const s of (wipData?.sources || [])) {
+    const label = String(s.label || "").trim();
+    const m = label.match(/^([^,]+),\s*([A-Za-z]{2})\b/);
+    if (!m) continue;
+    const state = m[2].toUpperCase();
+    const nm = m[1].trim();
+    out.add(`${nm}, ${state}`.toLowerCase());
+    if (!/(?:county|parish|city)$/i.test(nm)) {
+      out.add(`${nm} County, ${state}`.toLowerCase());
+    }
+  }
+  return out;
+}
+
+function findAcquiredNotDigitized(summary, wipData) {
+  const counties = Array.isArray(summary?.counties) ? summary.counties : [];
+  const wipKeys = buildWipCountyIdSet(wipData);
+  const out = [];
+  for (const c of counties) {
+    if (statusCategory(c.status).toUpperCase() !== "ACQUIRED") continue;
+    if ((Number(c.rows_total) || 0) > 0) continue;
+    const cid = String(
+      c.county_id || `${c.county_name}, ${c.state || c.st || ""}`,
+    )
+      .trim()
+      .toLowerCase();
+    if (wipKeys.has(cid)) continue;
+    out.push(c);
+  }
+  out.sort((a, b) =>
+    String(a.county_name || "").localeCompare(
+      String(b.county_name || ""),
+      undefined,
+      { sensitivity: "base" },
+    ),
+  );
+  return out;
+}
+
+function renderAcquiredNotDigitized(summary, wipData) {
+  const panel = document.getElementById("acquired-todo-panel");
   if (!panel) return;
+  const grid = panel.querySelector("#acquired-todo-grid");
+  const countEl = panel.querySelector("#acquired-todo-count");
+  if (!grid) return;
+
+  const list = findAcquiredNotDigitized(summary, wipData);
+  if (!list.length) {
+    panel.hidden = true;
+    grid.innerHTML = "";
+    if (countEl) countEl.textContent = "";
+    return;
+  }
+  panel.hidden = false;
+  if (countEl) {
+    countEl.textContent = `${list.length} ${list.length === 1 ? "county" : "counties"}`;
+  }
+  grid.innerHTML = list
+    .map((c) => {
+      const name = escapeHtml(c.county_name || "");
+      const state = escapeHtml(c.state || c.st || "");
+      const city = escapeHtml(getRowCentralCity(c) || "");
+      const cityHtml = city
+        ? `<span class="acquired-todo-city">${city}</span>`
+        : "";
+      return `
+        <div class="acquired-todo-chip">
+          <div class="acquired-todo-name">${name}</div>
+          <div class="acquired-todo-meta">
+            <span class="acquired-todo-state">${state}</span>${cityHtml ? "<span class=\"acquired-todo-sep\" aria-hidden=\"true\">·</span>" + cityHtml : ""}
+          </div>
+        </div>`;
+    })
+    .join("");
+}
+
+async function loadAndRenderWorkInProgress(summary) {
+  const panel = document.getElementById("wip-panel");
+  if (!panel) {
+    if (summary) renderAcquiredNotDigitized(summary, null);
+    return;
+  }
   const errEl = panel.querySelector("#wip-error");
   const metaEl = panel.querySelector("#wip-generated");
   try {
@@ -727,6 +828,7 @@ async function loadAndRenderWorkInProgress() {
       loadWorkInProgressHistoryJson(),
     ]);
     renderWorkInProgress(panel, data, history);
+    if (summary) renderAcquiredNotDigitized(summary, data);
   } catch (e) {
     console.error(e);
     panel.hidden = false;
@@ -750,23 +852,24 @@ async function initOverviewPage() {
     rows_geocoded: document.getElementById("total-rows-geocoded"),
   };
 
+  let summary = null;
   try {
-    const data = await loadSummaryJson();
-    setGeneratedAt(generatedAtEl, data.generated_at);
-    setTotals(totalsEl, data.totals);
+    summary = await loadSummaryJson();
+    setGeneratedAt(generatedAtEl, summary.generated_at);
+    setTotals(totalsEl, summary.totals);
     renderStatusBreakdown(
       document.getElementById("status-breakdown-section"),
       document.getElementById("status-breakdown"),
-      data.totals?.status_counts
+      summary.totals?.status_counts
     );
-    queueOverviewMap(data.counties || []);
+    queueOverviewMap(summary.counties || []);
   } catch (err) {
     console.error("Failed to load summary.json", err);
     if (generatedAtEl) {
       generatedAtEl.textContent = "Could not load summary";
     }
   }
-  void loadAndRenderWorkInProgress();
+  void loadAndRenderWorkInProgress(summary);
 }
 
 async function initCountiesPage() {
