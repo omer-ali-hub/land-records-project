@@ -514,6 +514,84 @@ body {
   background: linear-gradient(90deg, rgba(37, 99, 235, 0.95), rgba(59, 130, 246, 0.95));
 }
 
+.wip-spark {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border-subtle);
+}
+
+.wip-spark-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.wip-spark-title {
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+.wip-spark-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 9px;
+}
+
+.wip-spark-line {
+  fill: none;
+  stroke: rgba(34, 211, 238, 0.95);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.wip-spark-area {
+  fill: rgba(34, 211, 238, 0.16);
+  stroke: none;
+}
+
+.wip-spark-dot {
+  fill: rgba(34, 211, 238, 0.95);
+  stroke: rgba(15, 23, 42, 0.85);
+  stroke-width: 0.75;
+}
+
+.wip-spark-grid {
+  stroke: rgba(100, 116, 139, 0.22);
+  stroke-width: 0.6;
+}
+
+.wip-spark-ytick {
+  fill: var(--muted);
+  font-size: 8.5px;
+  text-anchor: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.wip-spark-xtick {
+  fill: var(--muted);
+  font-size: 8.5px;
+}
+
+.wip-spark-last {
+  fill: var(--text);
+  font-size: 9.5px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.wip-spark-empty {
+  margin: 0;
+  padding: 8px 0 2px;
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
 .wip-placeholder {
   margin: 0;
   padding: 16px;

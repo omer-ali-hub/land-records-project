@@ -38,11 +38,21 @@ function escapeHtml(str) {
     .replace(/'/g, "&#039;");
 }
 
+/**
+ * Force a fresh JSON fetch on every visit by appending a timestamp; the
+ * GitHub Pages CDN otherwise caches `trends.json` for several minutes.
+ * (`common.js` already declares its own copy on overview/data-acquisition.)
+ */
+function withCacheBust(url) {
+  const sep = url.includes("?") ? "&" : "?";
+  return `${url}${sep}_=${Date.now()}`;
+}
+
 async function loadTrendsJsonDiscrepancy() {
   const candidates = ["trends.json", "../data_summary/trends.json"];
   let lastStatus = null;
   for (const url of candidates) {
-    const res = await fetch(url, { cache: "no-store" });
+    const res = await fetch(withCacheBust(url), { cache: "no-store" });
     if (res.ok) {
       return await res.json();
     }

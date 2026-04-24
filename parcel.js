@@ -47,11 +47,17 @@ function normalizeParcelCountyEntry(raw) {
   return raw;
 }
 
+/** Bust browser/CDN caches so each visit fetches fresh JSON. */
+function withCacheBust(url) {
+  const sep = url.includes("?") ? "&" : "?";
+  return `${url}${sep}_=${Date.now()}`;
+}
+
 async function loadParcelJson() {
   const candidates = ["parcel_counties.json", "../data_summary/parcel_counties.json"];
   let lastStatus = null;
   for (const url of candidates) {
-    const res = await fetch(url, { cache: "no-store" });
+    const res = await fetch(withCacheBust(url), { cache: "no-store" });
     if (res.ok) return await res.json();
     lastStatus = res.status;
   }

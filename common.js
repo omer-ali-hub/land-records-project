@@ -1,9 +1,20 @@
+/**
+ * Append a `?_=<timestamp>` query string so the GitHub Pages CDN, browser
+ * caches, and any service workers always re-fetch fresh JSON. The browser is
+ * already given `cache: "no-store"`, but unique URLs also force the CDN edge
+ * to revalidate against the origin.
+ */
+function withCacheBust(url) {
+  const sep = url.includes("?") ? "&" : "?";
+  return `${url}${sep}_=${Date.now()}`;
+}
+
 async function loadSummaryJson() {
   // GitHub Pages / docs/: same folder as the HTML. Local preview from site/: ../data_summary/
   const candidates = ["summary.json", "../data_summary/summary.json"];
   let lastStatus = null;
   for (const url of candidates) {
-    const res = await fetch(url, { cache: "no-store" });
+    const res = await fetch(withCacheBust(url), { cache: "no-store" });
     if (res.ok) {
       return await res.json();
     }
@@ -17,14 +28,13 @@ async function loadSummaryJson() {
 }
 
 async function loadWorkInProgressJson() {
-  const bust = `_=${Date.now()}`;
   const candidates = [
-    `work_in_progress.json?${bust}`,
-    `../data_summary/work_in_progress.json?${bust}`,
+    "work_in_progress.json",
+    "../data_summary/work_in_progress.json",
   ];
   let lastStatus = null;
   for (const url of candidates) {
-    const res = await fetch(url, { cache: "no-store" });
+    const res = await fetch(withCacheBust(url), { cache: "no-store" });
     if (res.ok) {
       return await res.json();
     }
@@ -35,6 +45,24 @@ async function loadWorkInProgressJson() {
       ? `Could not load work in progress (HTTP ${lastStatus})`
       : "Could not load work in progress",
   );
+}
+
+async function loadWorkInProgressHistoryJson() {
+  const candidates = [
+    "work_in_progress_history.json",
+    "../data_summary/work_in_progress_history.json",
+  ];
+  for (const url of candidates) {
+    try {
+      const res = await fetch(withCacheBust(url), { cache: "no-store" });
+      if (res.ok) {
+        return await res.json();
+      }
+    } catch (e) {
+      /* try next candidate */
+    }
+  }
+  return null;
 }
 
 function filterCountyRows(counties) {
@@ -434,7 +462,152 @@ async function loadMapWhenReady(el, counties) {
   }
 }
 
-function buildWipCard(s) {
+/**
+ * Build a small SVG line chart of `% checked` per day for one source over the
+ * past `windowDays` days. Returns a string (HTML) — empty if there are fewer
+ * than 2 data points to draw a line.
+ *
+ * Each `point` is `{date: "YYYY-MM-DD", pct: number}`.
+ */
+function buildWipSparkline(points, windowDays) {
+  const days = Number.isFinite(windowDays) && windowDays > 0 ? windowDays : 30;
+  const today = new Date();
+  today.setUTCHours(0, 0, 0, 0);
+  const cutoff = new Date(today);
+  cutoff.setUTCDate(cutoff.getUTCDate() - (days - 1));
+
+  const filtered = (points || [])
+    .filter((p) => {
+      const d = new Date(`${p.date}T00:00:00Z`);
+      return !Number.isNaN(d.getTime()) && d >= cutoff;
+    })
+    .sort((a, b) => (a.date < b.date ? -1 : 1));
+
+  if (filtered.length === 0) {
+    return '<p class="wip-spark-empty">No history yet — first snapshot will appear after the next run.</p>';
+  }
+  if (filtered.length === 1) {
+    const only = filtered[0];
+    const dateStr = new Date(`${only.date}T00:00:00Z`).toLocaleDateString(
+      undefined,
+      { timeZone: "UTC" },
+    );
+    return `<p class="wip-spark-empty">Only one snapshot so far (${escapeHtml(dateStr)}, ${only.pct.toFixed(1)}%). The line chart appears once a second day is recorded.</p>`;
+  }
+
+  const W = 280;
+  const H = 64;
+  const PAD_L = 28;
+  const PAD_R = 8;
+  const PAD_T = 8;
+  const PAD_B = 18;
+  const innerW = W - PAD_L - PAD_R;
+  const innerH = H - PAD_T - PAD_B;
+
+  const xs = filtered.map((p) => new Date(`${p.date}T00:00:00Z`).getTime());
+  const xMin = cutoff.getTime();
+  const xMax = today.getTime();
+  const xSpan = xMax - xMin || 1;
+
+  const yVals = filtered.map((p) => p.pct);
+  let yMin = Math.min(...yVals);
+  let yMax = Math.max(...yVals);
+  // Pad the y range so the line isn't pinned to the edges; floor at 0 and cap at 100.
+  const yPad = Math.max(2, (yMax - yMin) * 0.15);
+  yMin = Math.max(0, Math.floor(yMin - yPad));
+  yMax = Math.min(100, Math.ceil(yMax + yPad));
+  if (yMax - yMin < 2) {
+    yMax = Math.min(100, yMin + 2);
+  }
+  const ySpan = yMax - yMin || 1;
+
+  const xFor = (t) => PAD_L + ((t - xMin) / xSpan) * innerW;
+  const yFor = (v) => PAD_T + (1 - (v - yMin) / ySpan) * innerH;
+
+  const points2 = filtered.map((p, i) => ({
+    x: xFor(xs[i]),
+    y: yFor(p.pct),
+    pct: p.pct,
+    date: p.date,
+  }));
+
+  const pathD = points2
+    .map((p, i) => `${i === 0 ? "M" : "L"}${p.x.toFixed(1)},${p.y.toFixed(1)}`)
+    .join(" ");
+  const areaD =
+    `M${points2[0].x.toFixed(1)},${(PAD_T + innerH).toFixed(1)} ` +
+    points2.map((p) => `L${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" ") +
+    ` L${points2[points2.length - 1].x.toFixed(1)},${(PAD_T + innerH).toFixed(1)} Z`;
+
+  const yTicks = [yMin, Math.round((yMin + yMax) / 2), yMax];
+  const yTickEls = yTicks
+    .map((v) => {
+      const y = yFor(v);
+      return `
+        <line x1="${PAD_L}" x2="${PAD_L + innerW}" y1="${y.toFixed(1)}" y2="${y.toFixed(1)}" class="wip-spark-grid" />
+        <text x="${(PAD_L - 4).toFixed(1)}" y="${(y + 3).toFixed(1)}" class="wip-spark-ytick">${v}%</text>`;
+    })
+    .join("");
+
+  const fmtShort = (d) =>
+    d.toLocaleDateString(undefined, {
+      month: "short",
+      day: "numeric",
+      timeZone: "UTC",
+    });
+  const startLabel = fmtShort(new Date(xMin));
+  const endLabel = fmtShort(new Date(xMax));
+  const xLabels = `
+    <text x="${PAD_L.toFixed(1)}" y="${(H - 4).toFixed(1)}" class="wip-spark-xtick" text-anchor="start">${escapeHtml(startLabel)}</text>
+    <text x="${(PAD_L + innerW).toFixed(1)}" y="${(H - 4).toFixed(1)}" class="wip-spark-xtick" text-anchor="end">${escapeHtml(endLabel)}</text>`;
+
+  const last = points2[points2.length - 1];
+  const dotEls = points2
+    .map(
+      (p) =>
+        `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="2" class="wip-spark-dot"><title>${escapeHtml(p.date)}: ${p.pct.toFixed(1)}%</title></circle>`,
+    )
+    .join("");
+
+  const lastLabelX = Math.min(last.x + 4, W - 4);
+  const lastLabelAnchor = lastLabelX > W - 30 ? "end" : "start";
+
+  return `
+    <svg class="wip-spark-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Percent checked over the past ${days} days">
+      ${yTickEls}
+      <path d="${areaD}" class="wip-spark-area" />
+      <path d="${pathD}" class="wip-spark-line" />
+      ${dotEls}
+      <text x="${lastLabelX.toFixed(1)}" y="${(last.y - 4).toFixed(1)}" text-anchor="${lastLabelAnchor}" class="wip-spark-last">${last.pct.toFixed(1)}%</text>
+      ${xLabels}
+    </svg>`;
+}
+
+/**
+ * Build a per-source history of `% checked` from the snapshot file written by
+ * `update_work_in_progress.py`. Returns a Map of source id -> array of points.
+ */
+function indexWipHistoryById(history) {
+  const out = new Map();
+  if (!history || !Array.isArray(history.snapshots)) return out;
+  for (const snap of history.snapshots) {
+    const date = String(snap.date || "").trim();
+    if (!date) continue;
+    const sources = Array.isArray(snap.sources) ? snap.sources : [];
+    for (const s of sources) {
+      const id = String(s.id || "").trim();
+      const total = Math.max(0, Number(s.total_rows) || 0);
+      const checked = Math.max(0, Math.min(Number(s.checked_rows) || 0, total));
+      if (total <= 0) continue;
+      const pct = (checked / total) * 100;
+      if (!out.has(id)) out.set(id, []);
+      out.get(id).push({ date, pct });
+    }
+  }
+  return out;
+}
+
+function buildWipCard(s, history) {
   const total = Math.max(0, Number(s.total_rows) || 0);
   const checked = Math.max(0, Math.min(Number(s.checked_rows) || 0, total));
   const pct = total > 0 ? Math.round((checked / total) * 1000) / 10 : 0;
@@ -460,6 +633,17 @@ function buildWipCard(s) {
       discoveryNote = `<p class="wip-tab-note">Configured tab(s) only (<strong>${tabsScanned}</strong>) — not the full workbook yet.</p>`;
     }
   }
+
+  const sparkPoints = history && s.id ? history.get(String(s.id).trim()) : null;
+  const sparkBlock = sparkPoints
+    ? `
+    <div class="wip-spark" aria-label="Percent checked over the past month for ${titleEsc}">
+      <div class="wip-spark-head">
+        <span class="wip-spark-title">% checked, past 30 days</span>
+      </div>
+      ${buildWipSparkline(sparkPoints, 30)}
+    </div>`
+    : "";
 
   art.innerHTML = `
     <header class="wip-card__head">
@@ -487,11 +671,12 @@ function buildWipCard(s) {
         </div>
       </div>
     </div>
+    ${sparkBlock}
   `;
   return art;
 }
 
-function renderWorkInProgress(panel, data) {
+function renderWorkInProgress(panel, data, history) {
   const cardsRoot = panel.querySelector("#wip-cards");
   const errEl = panel.querySelector("#wip-error");
   const metaEl = panel.querySelector("#wip-generated");
@@ -519,9 +704,10 @@ function renderWorkInProgress(panel, data) {
     banner.innerHTML = `<p class="wip-discovery-hint__p"><strong>${namesEsc}</strong> — totals use only the tab(s) in config (full-workbook export or tab listing did not run from your machine). From the repo root run <code>python3 scripts/update_work_in_progress.py</code> (see that script for dependencies and optional API credentials), re-run, then reload.</p>`;
     cardsRoot.appendChild(banner);
   }
+  const historyById = indexWipHistoryById(history);
   const frag = document.createDocumentFragment();
   for (const s of sources) {
-    frag.appendChild(buildWipCard(s));
+    frag.appendChild(buildWipCard(s, historyById));
   }
   cardsRoot.appendChild(frag);
   if (data.generated_at && metaEl) {
@@ -536,8 +722,11 @@ async function loadAndRenderWorkInProgress() {
   const errEl = panel.querySelector("#wip-error");
   const metaEl = panel.querySelector("#wip-generated");
   try {
-    const data = await loadWorkInProgressJson();
-    renderWorkInProgress(panel, data);
+    const [data, history] = await Promise.all([
+      loadWorkInProgressJson(),
+      loadWorkInProgressHistoryJson(),
+    ]);
+    renderWorkInProgress(panel, data, history);
   } catch (e) {
     console.error(e);
     panel.hidden = false;

@@ -37,13 +37,18 @@ function escapeHtml(str) {
     .replace(/'/g, "&#039;");
 }
 
+/** Bust browser/CDN caches so each visit fetches fresh JSON. */
+function withCacheBust(url) {
+  const sep = url.includes("?") ? "&" : "?";
+  return `${url}${sep}_=${Date.now()}`;
+}
+
 const geoCache = new Map();
 
 async function fetchGeoJson(relPath) {
   if (geoCache.has(relPath)) return geoCache.get(relPath);
-  const res = await fetch(`${mapsBaseUrl()}${relPath.replace(/^\//, "")}`, {
-    cache: "no-store",
-  });
+  const url = withCacheBust(`${mapsBaseUrl()}${relPath.replace(/^\//, "")}`);
+  const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) throw new Error(`GeoJSON ${res.status}`);
   const gj = await res.json();
   geoCache.set(relPath, gj);
@@ -271,7 +276,7 @@ async function initMapsPage() {
   if (!root) return;
 
   try {
-    const res = await fetch(`${mapsBaseUrl()}maps_index.json`, { cache: "no-store" });
+    const res = await fetch(withCacheBust(`${mapsBaseUrl()}maps_index.json`), { cache: "no-store" });
     if (!res.ok) throw new Error(`maps_index ${res.status}`);
     const data = await res.json();
     if (data.generated_at && meta) {

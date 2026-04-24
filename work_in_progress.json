@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-15T17:13:47.392485+00:00",
+  "generated_at": "2026-04-23T16:36:05.507263+00:00",
   "sources": [
     {
       "id": "maricopa",
@@ -18,7 +18,7 @@
       "id": "bexar",
       "label": "Bexar, TX (San Antonio)",
       "total_rows": 27251,
-      "checked_rows": 18060,
+      "checked_rows": 18709,
       "total_bar_label": "Rows with data (all tabs)",
       "checked_bar_label": "Pipeline output checked (checked_by)",
       "tabs_scanned": 9,

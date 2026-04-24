@@ -24,11 +24,20 @@ function mapsBaseUrl() {
   return raw;
 }
 
+/**
+ * Bust browser/CDN caches: GitHub Pages caches JSON for ~10 minutes by default,
+ * so we append a unique timestamp to force a fresh fetch on every page load.
+ */
+function withCacheBust(url) {
+  const sep = url.includes("?") ? "&" : "?";
+  return `${url}${sep}_=${Date.now()}`;
+}
+
 async function loadAllMortgagesJson() {
   const candidates = ["all_mortgages.json", "../data_summary/all_mortgages.json"];
   let lastStatus = null;
   for (const url of candidates) {
-    const res = await fetch(url, { cache: "no-store" });
+    const res = await fetch(withCacheBust(url), { cache: "no-store" });
     if (res.ok) return await res.json();
     lastStatus = res.status;
   }
@@ -139,7 +148,8 @@ function renderCharts(root, counties) {
 }
 
 async function fetchGeoJson(relPath) {
-  const res = await fetch(`${mapsBaseUrl()}${relPath.replace(/^\//, "")}`, { cache: "no-store" });
+  const url = withCacheBust(`${mapsBaseUrl()}${relPath.replace(/^\//, "")}`);
+  const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) throw new Error(`GeoJSON ${res.status}`);
   return await res.json();
 }
