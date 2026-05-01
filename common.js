@@ -754,16 +754,14 @@ function buildWipCountyIdSet(wipData) {
 
 /**
  * Counties to emphasize in "Acquired but not yet digitized" (normalized county_id).
- * Includes Orange County variants (CA / FL / NC) if they appear in that section.
  */
 const ACQUIRED_TODO_HIGH_PRIORITY_IDS = new Set([
   "hennepin county, mn",
   "dane county, wi",
   "shelby county, tn",
+  "baltimore county, md",
   "whatcom county, wa",
-  "orange county, ca",
   "orange county, fl",
-  "orange county, nc",
   "mobile county, al",
 ]);
 
