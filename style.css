@@ -1247,11 +1247,89 @@ select:focus-visible {
   letter-spacing: 0.04em;
 }
 
+.maps-black-share-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--text);
+  cursor: pointer;
+  user-select: none;
+}
+
+.maps-black-share-label--na {
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+.maps-black-share-label input {
+  width: 15px;
+  height: 15px;
+  accent-color: var(--accent);
+}
+
+.maps-tract-footnote {
+  margin: 0;
+  padding: 8px 16px 10px;
+  font-size: 0.76rem;
+  color: var(--muted);
+  line-height: 1.45;
+  border-bottom: 1px solid var(--card-border);
+  background: rgba(15, 23, 42, 0.28);
+}
+
+.maps-map-shell {
+  position: relative;
+}
+
 .maps-leaflet-root {
   height: min(960px, 90vh);
   min-height: 620px;
   width: 100%;
   background: #e2e8f0;
+}
+
+.maps-tract-legend {
+  position: absolute;
+  z-index: 600;
+  bottom: 12px;
+  left: 12px;
+  padding: 8px 10px 10px;
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow-subtle);
+  pointer-events: none;
+  max-width: min(220px, 92%);
+}
+
+.maps-tract-legend__title {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.maps-tract-legend__bar {
+  height: 10px;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    rgb(248, 250, 252) 0%,
+    rgb(91, 33, 182) 100%
+  );
+  border: 1px solid rgba(100, 116, 139, 0.45);
+}
+
+.maps-tract-legend__ticks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+  font-size: 0.68rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
 }
 
 .maps-inline-error {

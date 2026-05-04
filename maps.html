@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body data-maps-base="">
+  <body data-maps-base="../data_summary/">
     <header class="top-bar">
       <div class="top-bar-left">
         <h1>Land Records Project Dashboard</h1>
@@ -39,6 +39,8 @@
           Markers are fixed on the map; changing the <strong>Period</strong> dropdown only filters
           which points are visible. <strong>All years</strong> colors markers by calendar year. FHA
           uses × markers; VA uses circles. There is no clustering.
+          Where tract race layers exist, you can turn on <strong>1970 Black pop. share (tract)</strong>;
+          that choropleth draws beneath the mortgage markers.
         </p>
         <div id="maps-county-list" class="maps-county-list" aria-busy="true">
           <p class="maps-page-placeholder">Loading map list…</p>

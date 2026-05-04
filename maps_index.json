@@ -27,7 +27,9 @@
           39.416996749999996,
           -76.519414
         ]
-      ]
+      ],
+      "maps_slug": "baltimore_city_md",
+      "census_tract_black_share": "maps/census_tracts/baltimore_city_md_black_share_1970.geojson"
     },
     {
       "county_id": "Berks County, PA",
@@ -46,7 +48,9 @@
           41.305443525,
           -75.54889376
         ]
-      ]
+      ],
+      "maps_slug": "berks_pa",
+      "census_tract_black_share": "maps/census_tracts/berks_pa_black_share_1970.geojson"
     },
     {
       "county_id": "Galveston County, TX",
@@ -65,7 +69,9 @@
           29.582922505,
           -94.345156645
         ]
-      ]
+      ],
+      "maps_slug": "galveston_tx",
+      "census_tract_black_share": "maps/census_tracts/galveston_tx_black_share_1970.geojson"
     },
     {
       "county_id": "Guilford County, NC",
@@ -84,7 +90,9 @@
           36.25732343,
           -79.517162845
         ]
-      ]
+      ],
+      "maps_slug": "guilford_nc",
+      "census_tract_black_share": "maps/census_tracts/guilford_nc_black_share_1970.geojson"
     },
     {
       "county_id": "Hampden County, MA",
@@ -103,7 +111,9 @@
           57.888249215,
           149.517772865
         ]
-      ]
+      ],
+      "maps_slug": "hampden_ma",
+      "census_tract_black_share": "maps/census_tracts/hampden_ma_black_share_1970.geojson"
     },
     {
       "county_id": "Mecklenburg County, NC",
@@ -122,7 +132,9 @@
           35.817716284999996,
           -78.576380915
         ]
-      ]
+      ],
+      "maps_slug": "mecklenburg_nc",
+      "census_tract_black_share": "maps/census_tracts/mecklenburg_nc_black_share_1970.geojson"
     },
     {
       "county_id": "Peoria County, IL",
@@ -141,7 +153,9 @@
           40.9507004,
           -89.4575407
         ]
-      ]
+      ],
+      "maps_slug": "peoria_il",
+      "census_tract_black_share": "maps/census_tracts/peoria_il_black_share_1970.geojson"
     },
     {
       "county_id": "Philadelphia County, PA",
@@ -160,7 +174,9 @@
           40.14428695,
           -74.9496494
         ]
-      ]
+      ],
+      "maps_slug": "philadelphia_pa",
+      "census_tract_black_share": "maps/census_tracts/philadelphia_pa_black_share_1970.geojson"
     },
     {
       "county_id": "Tulsa County, OK",
@@ -179,7 +195,9 @@
           47.296374525,
           -72.768534045
         ]
-      ]
+      ],
+      "maps_slug": "tulsa_ok",
+      "census_tract_black_share": "maps/census_tracts/tulsa_ok_black_share_1970.geojson"
     }
   ]
 }

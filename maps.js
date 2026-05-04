@@ -79,6 +79,17 @@ function boundaryHolesLatLngs(featureCollection) {
   return holes;
 }
 
+/** Choropleth fill for 0–100% Black share (1970 NHGIS “Negro” / total race counts). */
+function blackShareFillColor(pct) {
+  const n = Number(pct);
+  if (pct == null || Number.isNaN(n)) return "rgba(148, 163, 184, 0.42)";
+  const t = Math.max(0, Math.min(1, n / 100));
+  const r = Math.round(248 - t * 187);
+  const g = Math.round(250 - t * 221);
+  const b = Math.round(252 - t * 103);
+  return `rgb(${r},${g},${b})`;
+}
+
 function tooltipHtml(props, allMode) {
   const y = props.year;
   const p = props.period;
@@ -154,9 +165,14 @@ function destroyLeafletOnCard(container) {
 function initCountyBlock(container, entry, allValue, initSeq) {
   const mapEl = container.querySelector(".maps-leaflet-root");
   const select = container.querySelector("select");
+  const blackShareCb = container.querySelector(".maps-black-share-cb");
+  const tractLegend = container.querySelector(".maps-tract-legend");
   let map = null;
   let pointsLayer = null;
   let pointsGeojson = null;
+  let tractLayerRoot = null;
+  let tractGeoLoaded = null;
+  const censusRel = entry.census_tract_black_share || "";
   const canvasRenderer = L.canvas({ padding: 0.5 });
   const stale = () =>
     initSeq !== undefined && Number(container.dataset.mapsInitSeq) !== initSeq;
@@ -164,6 +180,44 @@ function initCountyBlock(container, entry, allValue, initSeq) {
   function applyPeriod() {
     if (!map || !pointsLayer || !pointsGeojson) return;
     fillPointsLayer(pointsLayer, pointsGeojson, select.value, allValue, canvasRenderer);
+  }
+
+  async function ensureTractLayerOnMap() {
+    if (!map || !tractLayerRoot || !censusRel) return;
+    if (!tractGeoLoaded) {
+      const gj = await fetchGeoJson(censusRel);
+      if (stale()) return;
+      L.geoJSON(gj, {
+        pane: "mapsTractPane",
+        style(feat) {
+          const p = feat.properties?.pct_black;
+          return {
+            fillColor: blackShareFillColor(p),
+            color: "rgba(30, 41, 59, 0.45)",
+            weight: 0.35,
+            fillOpacity: 0.62,
+          };
+        },
+        onEachFeature(feat, lyr) {
+          const p = feat.properties?.pct_black;
+          const t =
+            p != null && !Number.isNaN(Number(p))
+              ? `${Number(p).toFixed(1)}% Black (1970 tract)`
+              : "Share n/a";
+          lyr.bindTooltip(`<span>${escapeHtml(t)}</span>`, { sticky: true });
+        },
+      }).addTo(tractLayerRoot);
+      tractGeoLoaded = true;
+    }
+    if (!map.hasLayer(tractLayerRoot)) tractLayerRoot.addTo(map);
+    if (tractLegend) tractLegend.hidden = false;
+  }
+
+  function removeTractLayerFromMap() {
+    if (map && tractLayerRoot && map.hasLayer(tractLayerRoot)) {
+      map.removeLayer(tractLayerRoot);
+    }
+    if (tractLegend) tractLegend.hidden = true;
   }
 
   async function setup() {
@@ -187,6 +241,17 @@ function initCountyBlock(container, entry, allValue, initSeq) {
     });
     mapsForResize.push(map);
 
+    map.createPane("mapsTractPane");
+    map.getPane("mapsTractPane").style.zIndex = 360;
+    map.createPane("mapsMaskPane");
+    map.getPane("mapsMaskPane").style.zIndex = 380;
+    map.createPane("mapsBoundaryPane");
+    map.getPane("mapsBoundaryPane").style.zIndex = 385;
+    map.createPane("mapsPointsPane");
+    map.getPane("mapsPointsPane").style.zIndex = 450;
+
+    tractLayerRoot = L.layerGroup({ pane: "mapsTractPane" });
+
     L.tileLayer(CARTO_LIGHT, {
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
@@ -198,6 +263,7 @@ function initCountyBlock(container, entry, allValue, initSeq) {
     let countyBounds = null;
     if (boundaryFC && (boundaryFC.features || []).length) {
       const gjLayer = L.geoJSON(boundaryFC, {
+        pane: "mapsBoundaryPane",
         style: {
           color: "#64748b",
           weight: 2,
@@ -212,6 +278,7 @@ function initCountyBlock(container, entry, allValue, initSeq) {
       if (holes.length) {
         const maskLatLngs = [WORLD_MASK_OUTER, ...holes];
         L.polygon(maskLatLngs, {
+          pane: "mapsMaskPane",
           stroke: false,
           fillColor: "#020617",
           fillOpacity: 0.78,
@@ -223,6 +290,7 @@ function initCountyBlock(container, entry, allValue, initSeq) {
     } else if (entry.bounds && entry.bounds.length === 2) {
       countyBounds = L.latLngBounds(entry.bounds[0], entry.bounds[1]);
       L.rectangle(countyBounds, {
+        pane: "mapsBoundaryPane",
         color: "#64748b",
         weight: 2,
         fillOpacity: 0,
@@ -239,8 +307,12 @@ function initCountyBlock(container, entry, allValue, initSeq) {
       map.setView([39.5, -98.35], 9);
     }
 
-    pointsLayer = L.layerGroup().addTo(map);
+    pointsLayer = L.layerGroup({ pane: "mapsPointsPane" }).addTo(map);
     applyPeriod();
+
+    if (blackShareCb && blackShareCb.checked && censusRel) {
+      await ensureTractLayerOnMap();
+    }
 
     if (stale()) {
       disposeMapInstance(map);
@@ -256,6 +328,20 @@ function initCountyBlock(container, entry, allValue, initSeq) {
   select.addEventListener("change", () => {
     applyPeriod();
   });
+
+  if (blackShareCb) {
+    blackShareCb.addEventListener("change", async () => {
+      if (!map) return;
+      try {
+        if (blackShareCb.checked) await ensureTractLayerOnMap();
+        else removeTractLayerFromMap();
+      } catch (e) {
+        console.error(e);
+        blackShareCb.checked = false;
+        removeTractLayerFromMap();
+      }
+    });
+  }
 
   setup().catch((e) => {
     console.error(e);
@@ -360,6 +446,10 @@ async function initMapsPage() {
         ...periodsList.map((p) => `<option value="${escapeHtml(p)}">${escapeHtml(p)}</option>`),
         `<option value="${escapeHtml(allPeriodsValue)}">All years</option>`,
       ].join("");
+      const hasTractRace = Boolean(entry.census_tract_black_share);
+      const tractHint = hasTractRace
+        ? "NHGIS 1970 tract race table (Negro share of White+Negro+Other)."
+        : "Tract race layer not built for this county (run build with census_data + geopandas).";
 
       card.innerHTML = `
         <header class="maps-county-card__head">
@@ -371,10 +461,24 @@ async function initMapsPage() {
                 ${opts}
               </select>
             </label>
+            <label class="maps-black-share-label ${hasTractRace ? "" : "maps-black-share-label--na"}" title="${escapeHtml(tractHint)}">
+              <input type="checkbox" class="maps-black-share-cb" ${hasTractRace ? "" : "disabled"} aria-describedby="maps-tract-footnote" />
+              <span>1970 Black pop. share (tract)</span>
+            </label>
             <span class="maps-county-meta">${Number(entry.feature_count || 0).toLocaleString()} points</span>
           </div>
         </header>
-        <div class="maps-leaflet-root" role="application" aria-label="Map: ${escapeHtml(title)}"></div>
+        <p id="maps-tract-footnote" class="maps-tract-footnote">
+          Tract layer draws <strong>below</strong> FHA/VA points. Source: IPUMS NHGIS 1970 tract boundaries + race counts (see codebook).
+        </p>
+        <div class="maps-map-shell">
+          <div class="maps-leaflet-root" role="application" aria-label="Map: ${escapeHtml(title)}"></div>
+          <div class="maps-tract-legend" hidden>
+            <div class="maps-tract-legend__title">1970 tract Black share</div>
+            <div class="maps-tract-legend__bar" aria-hidden="true"></div>
+            <div class="maps-tract-legend__ticks"><span>0%</span><span>50%</span><span>100%</span></div>
+          </div>
+        </div>
       `;
       const seq = ++mapInitSeq;
       card.dataset.mapsInitSeq = String(seq);
